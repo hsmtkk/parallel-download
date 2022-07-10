@@ -1,0 +1,5 @@
+http://www.example.com/index.html
+https://www.yahoo.co.jp/index.html
+https://www.google.com/index.html
+https://go.dev/index.html
+https://www.rust-lang.org/index.html
