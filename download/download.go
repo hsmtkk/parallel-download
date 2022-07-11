@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"path"
 	"path/filepath"
 )
 
@@ -48,7 +49,7 @@ func (d *downloader) downloadAndSave(urlString string) error {
 	if err != nil {
 		return fmt.Errorf("failed to parse url; %s; %w", urlString, err)
 	}
-	path := filepath.Join(d.oupputDirectory, u.Path)
+	path := filepath.Join(d.oupputDirectory, path.Base(u.Path))
 	if err := os.WriteFile(path, body, 0644); err != nil {
 		return fmt.Errorf("failed to write file; %s; %w", path, err)
 	}
