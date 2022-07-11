@@ -10,17 +10,17 @@ import (
 	"path/filepath"
 )
 
-type Downloader struct {
+type downloader struct {
 	id              int
 	urlsChan        <-chan string
 	oupputDirectory string
 }
 
-func New(id int, urlsChan <-chan string, outputDirectory string) *Downloader {
-	return &Downloader{id, urlsChan, outputDirectory}
+func New(id int, urlsChan <-chan string, outputDirectory string) *downloader {
+	return &downloader{id, urlsChan, outputDirectory}
 }
 
-func (d *Downloader) Run() {
+func (d *downloader) Run() {
 	log.Printf("downloader %d begin", d.id)
 	for url := range d.urlsChan {
 		if err := d.downloadAndSave(url); err != nil {
@@ -30,7 +30,7 @@ func (d *Downloader) Run() {
 	log.Printf("downloader %d end", d.id)
 }
 
-func (d *Downloader) downloadAndSave(urlString string) error {
+func (d *downloader) downloadAndSave(urlString string) error {
 	log.Printf("download begin %s", urlString)
 	resp, err := http.Get(urlString)
 	if err != nil {
